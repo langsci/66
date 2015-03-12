@@ -29,7 +29,7 @@
 \input{localpackages.tex}
 \input{localhyphenation.tex}
 \input{localcommands.tex} 
-\bibliography{localbibliography} 
+\bibliography{MyBib} 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%                                              %%%
@@ -39,10 +39,10 @@
 \begin{document}              
 \maketitle                
 \frontmatter
-% %% uncomment if you have preface and/or acknowledgements
-% \include{chapters/preface}
-% \include{chapters/acknowledgments}
-% \include{chapters/abbreviations}
+%% uncomment if you have preface and/or acknowledgements
+%\include{chapters/preface}
+%\include{chapters/acknowledgments}
+%\include{chapters/abbreviations}
 \tableofcontents      
 \mainmatter         
  
@@ -53,43 +53,43 @@
 %%%                                              %%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{chapters/02_Frontmatter.tex}
-\input{chapters/03_How-to-use.tex}
-\input{chapters/03_Intro_Yakkha.tex}
-%\input{chapters/03_Typological_Profile.tex}
-\input{chapters/04_Phonology.tex}
-\input{chapters/06_Pronouns_etc.tex}
-\input{chapters/06_NounPhrase.tex}
-\input{chapters/09_AdjectivesAdverbs.tex}
-\input{chapters/09_Geomorphic.tex}
-\input{chapters/07_VerbalMorphology.tex}
-\input{chapters/07_VerbalMorphology_b.tex}
-\input{chapters/08_NounVerb.tex}
-\input{chapters/08_ComplexPredicates.tex}
-\input{chapters/10a_VerbalValency.tex}
-\input{chapters/10a_ValClasses.tex}
-\input{chapters/10b_TransitivityOperations.tex}
-\input{chapters/10b_TransitivityOperations_b.tex}
-\input{chapters/11_SimpleClause.tex}
-\input{chapters/12_Nomlz-Relativization.tex}
-\input{chapters/13_Converbs-AdverbialClauses.tex}
-\input{chapters/15_Complement.tex}
-\input{chapters/14_Coordination.tex}
-\input{chapters/18_Particles.tex}
-\input{chapters/20_app_phopciba.tex}
-\input{chapters/20_app_namthalungma.tex}
-\input{chapters/20_app_linkhedhunga.tex}
+ \input{chapters/02_Frontmatter.tex}
+ \input{chapters/03_How-to-use.tex}
+ \input{chapters/03_Intro_Yakkha.tex}
+ %%\input{chapters/03_Typological_Profile.tex}
+ \input{chapters/04_Phonology.tex}
+ \input{chapters/06_Pronouns_etc.tex}
+ \input{chapters/06_NounPhrase.tex}
+ \input{chapters/09_AdjectivesAdverbs.tex}
+ \input{chapters/09_Geomorphic.tex}
+ \input{chapters/07_VerbalMorphology.tex}
+ \input{chapters/07_VerbalMorphology_b.tex}
+ \input{chapters/08_NounVerb.tex}
+ \input{chapters/08_ComplexPredicates.tex}
+ \input{chapters/10a_VerbalValency.tex}
+ \input{chapters/10a_ValClasses.tex}
+ \input{chapters/10b_TransitivityOperations.tex}
+ \input{chapters/10b_TransitivityOperations_b.tex}
+ \input{chapters/11_SimpleClause.tex}
+ \input{chapters/12_Nomlz-Relativization.tex}
+ \input{chapters/13_Converbs-AdverbialClauses.tex}
+ \input{chapters/15_Complement.tex}
+ \input{chapters/14_Coordination.tex}
+ \input{chapters/18_Particles.tex}
+ \input{chapters/20_app_phopciba.tex}
+ \input{chapters/20_app_namthalungma.tex}
+ \input{chapters/20_app_linkhedhunga.tex}
 
 \cleardoubleemptypage
 \addcontentsline{toc}{chapter}{Appendix B: Yakkha kinship terms}
-\includepdf{Verwandtschaft_eigeneFamilie_zum_Einbinden.pdf}
+\includepdf[landscape=true,turn=false,pages=-,noautoscale=true]{figures/Verwandtschaft_eigeneFamilie_zum_Einbinden.pdf}
 \cleardoubleemptypage
-\includepdf{Verwandtschaft_Schwiegerfamilie_zum_Einbinden.pdf}
+\includepdf[landscape=true,turn=false,pages=-,noautoscale=true]{figures/Verwandtschaft_Schwiegerfamilie_zum_Einbinden.pdf}
 
-\input{21_affix_index.tex}
+\input{chapters/21_affix_index.tex}
 
 
-\input{19_Nocite.tex}
+\input{chapters/19_Nocite.tex}
 
  
 
