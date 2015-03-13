@@ -41,10 +41,10 @@
 \frontmatter
 %% uncomment if you have preface and/or acknowledgements
 %\include{chapters/preface}
-%\include{chapters/acknowledgments}
-%\include{chapters/abbreviations}
+\include{chapters/acknowledgments}
+\include{chapters/abbreviations}
 \tableofcontents      
-\mainmatter         
+ \mainmatter         
  
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -82,9 +82,10 @@
 
 \cleardoubleemptypage
 \addcontentsline{toc}{chapter}{Appendix B: Yakkha kinship terms}
-\includepdf[landscape=true,turn=false,pages=-,noautoscale=true]{figures/Verwandtschaft_eigeneFamilie_zum_Einbinden.pdf}
+\includepdf{figures/90Grad_Verwandtschaft_eigeneFamilie_zum_Einbinden.pdf}
 \cleardoubleemptypage
-\includepdf[landscape=true,turn=false,pages=-,noautoscale=true]{figures/Verwandtschaft_Schwiegerfamilie_zum_Einbinden.pdf}
+\includepdf{figures/90Grad_Verwandtschaft_Schwiegerfamilie_zum_Einbinden.pdf}
+
 
 \input{chapters/21_affix_index.tex}
 
@@ -102,6 +103,7 @@
 % There is normally no need to change the backmatter section
 \input{backmatter.tex}
 \end{document} 
+
 
 % you can create your book by running
 % xelatex lsp-skeleton.tex
