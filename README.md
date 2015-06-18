@@ -1,4 +1,4 @@
-# The Alor-Pantar languages: History and typology
+# A grammar of Yakkha
 
 ## Publication Info
 
