@@ -7,6 +7,9 @@
 \newcommand{\lsSeriesNumber}{??}
 \newcommand{\lsISSN}{??}
 \newcommand{\lsISBN}{000-0-000000-00-0}
+\newcommand{\lsISBNdigital}{000-0-000000-00-0}
+\newcommand{\lsISBNhardcover}{000-0-000000-00-0}
+\newcommand{\lsISBNsoftcover}{000-0-000000-00-0}
 \newcommand{\lsURL}{http://langsci-press.org/catalog}
 \newcommand{\lsSeries}{eotms}
 \newcommand{\lsSpineBreadth}{20mm}
@@ -15,12 +18,17 @@
 \newcommand{\lsCopyright}{CC-BY}
 \newcommand{\lsBiblatexBackend}{bibtex}
 \newif\iflsDraft \lsDraftfalse
+\newif\iflsOpenReview \lsOpenReviewfalse
+\newif\iflsShowIndex \lsShowIndexfalse
+
 \newif\iflsIndex \lsIndextrue
 \newif\iflsBiblatex \lsBiblatexfalse
 \newif\iflsCollection \lsCollectionfalse
 \newif\iflsCollectionChapter \lsCollectionChapterfalse
 \newif\iflsCollectionTOCLong \lsCollectionTOCLongfalse
 \newif\iflsNewtxmath \lsNewtxmathfalse
+\newif\iflsBlackandwhite \lsBlackandwhitefalse
+
 
 
 % Option handling:
@@ -53,7 +61,7 @@
 	\define@key{langsci}{biblatexbackend}{%
 		\renewcommand{\lsBiblatexBackend}{#1}}
 \DeclareVoidOption{blackandwhite}{
-	\newcommand{\blackandwhite}{}}
+	\lsBlackandwhitetrue} 
 \DeclareVoidOption{long}{
 	\renewcommand{\lsOutput}{long}}
 \DeclareVoidOption{smallfont}{  			
@@ -61,8 +69,13 @@
 \DeclareVoidOption{draftmode}{	% 'draftmode' instead of 'draft' due to undesirable side efects	
 	 \lsDrafttrue
 	 \overfullrule=5pt	}	% to indicate overfull hboxes
+\DeclareVoidOption{openreview}{
+	\lsOpenReviewtrue
+	\AtBeginDocument{\renewcommand{\lsISBN}{000-0-000000-00-0}}}
 \DeclareVoidOption{noindex}{  			
 	\lsIndexfalse }
+\DeclareVoidOption{showindex}{  			
+	\lsShowIndextrue }
 \DeclareVoidOption{biblatex}{  			
 	\lsBiblatextrue}
 \DeclareVoidOption{newtxmath}{  			
@@ -81,7 +94,7 @@
 	fontsize=\lsFontsize, % default is 11pt
 	footnotes=multiple,
 	numbers=noenddot,		% no point after last number of chapters/sections
-	toc=bibliographynumbered,
+	toc=bibliography,
 	index=totoc,
 	%chapterprefix=true,
 	%draft=yes,
@@ -89,21 +102,107 @@
 
 
 \usepackage{etex}
+\reserveinserts{18}
+\usepackage{xstring} % Needed on Lines 114ff and again on 167
+\usepackage{graphicx} % Needed twice
+\usepackage{hyphenat} % Needed twice
+
+\renewcommand{\lsISBN}{\lsISBNdigital} % for compatibility
 	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%      Output types (moved from below)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\lsOutputLong}{long}
+\newcommand{\lsOutputShort}{short}
+\newcommand{\lsOutputInprep}{inprep}
+\newcommand{\lsOutputPaper}{paper}
+\newcommand{\lsOutputGuidelines}{guidelines}
+\newcommand{\lsOutputCover}{cover}
+\newcommand{\lsOutputCoverBOD}{coverbod}
+\newcommand{\lsOutputCoverDOB}{coverdob}
+\newcommand{\lsOutputCoverCS}{covercreatespace}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 %    Page size and text area:
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
  
-\usepackage[ 
-	papersize={170mm,240mm}
-	,top=27.4mm % TODO nachgemessen, nach Vermassung eigentlich 30mm-16pt = 25.8mm
-	,inner=20.5mm, 
-	,outer=24.5mm
-	%,showframe,pass
-	,marginparwidth=50pt
-	]{geometry}
+ \ifx\lsOutput\lsOutputCoverCS % if output = cover; This is the CreateSpace Version 
+	\input{./lengths.tex}
+ 
+ 	\newlength{\seitenbreite}
+ 	\newlength{\seitenhoehe}
+ 	\newlength{\spinewidth}
+ 	\newlength{\totalwidth}
+ 	\newlength{\totalheight}
+ 	\newlength{\bleed}{3.175mm}
+ 	\setlength{\seitenbreite}{169.9mm}
+ 	\setlength{\seitenhoehe}{244.1mm}
+ 	
+ 	\setlength{\spinewidth}{\csspine}			% Create Space Version. Value is in ./localmetadata.tex
+ 	
+ 	
+ 	\usepackage{calc}
+
+
+ 	\setlength{\totalwidth}{\spinewidth+\seitenbreite+\seitenbreite+\bleed+\bleed}
+ 	\setlength{\totalheight}{\seitenhoehe+\bleed+\bleed}
+ 	\usepackage[paperheight=\totalheight, paperwidth=\totalwidth]{geometry}
+ 	\usepackage{tikz}
+
+ 	\usetikzlibrary{positioning}
+ 	\usetikzlibrary{calc}
+ 	\hyphenpenalty 750
+ 	    
+ \else
+ 
+ % Nested ifx. Here follows the BoD Version
+ 
+  \ifx\lsOutput\lsOutputCoverBOD 
+     \usepackage{calc}
+
+  \input{./lengths.tex}
+  
+  \newlength{\seitenbreite}
+  \newlength{\seitenhoehe}
+  \newlength{\spinewidth}
+  \newlength{\totalwidth}
+  \newlength{\bodfold}
+  \newlength{\totalspine}
+  %\newlength{\totalheight}
+  \setlength{\bodfold}{8mm}
+  \setlength{\seitenbreite}{192mm}
+  \setlength{\seitenhoehe}{280mm} % For BOD: Hardcover, Gerader Rücken, Kaschiert, papier 80g/m², weiß
+  \setlength{\spinewidth}{\bodspine}         % BoD Version. Value is in ./localmetadata.tex
+  \setlength{\totalspine}{\spinewidth+\bodfold+\bodfold} 
+  \setlength{\totalwidth}{\spinewidth+\seitenbreite+\seitenbreite}
+  %\setlength{\totalheight}{\seitenhoehe}
+  \usepackage[paperheight=\seitenhoehe, paperwidth=\totalwidth]{geometry}
+  \usepackage{tikz}
+  
+  \usetikzlibrary{positioning}
+  \usetikzlibrary{calc}
+  \hyphenpenalty 750
+  
+ \else 
+ 
+ 	\usepackage[ 					% if output != cover
+ 	papersize={170mm,240mm}
+ 	,top=27.4mm % TODO nachgemessen, nach Vermassung eigentlich 30mm-16pt = 25.8mm
+ 	,inner=20.5mm, 
+ 	,outer=24.5mm
+ 	%,showframe,pass
+ 	,marginparwidth=50pt
+ 	]{geometry}
+ \fi
+\fi
+ 
+
 			
 
 \usepackage[
@@ -122,12 +221,13 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\usepackage{xstring} 	% for manipulating strings
+%\usepackage{xstring} 	% for manipulating strings
 \usepackage{ifxetex}
 \ifxetex\else\ClassError{LSP/langsci}{Please use XeLaTeX!}{}\fi
 	
 \usepackage{amssymb} % has to be loaded before other stuff
-\usepackage{dtklogos}\newcommand{\xelatex}{\XeLaTeX\xspace}	% the XeLaTeX symbol			
+% \usepackage{dtklogos}\newcommand{\xelatex}{\XeLaTeX\xspace}	% the XeLaTeX symbol	
+\usepackage{metalogo}\newcommand{\xelatex}{\XeLaTeX\xspace}	
 \usepackage{fontspec}
 \newcommand{\fontpath}{./LSP/lsp-fonts/}
 
@@ -172,7 +272,7 @@
 
 %\frenchspacing			
 \usepackage[final]{microtype}
-\usepackage{graphicx}
+% \usepackage{graphicx}
 
   \newcommand{\lsCoverTitleFont}[1]{\sffamily\addfontfeatures{Scale=MatchUppercase}\fontsize{52pt}{16.75mm}\selectfont #1}
   \newcommand{\lsCoverSubTitleFont}{\sffamily\addfontfeatures{Scale=MatchUppercase}\fontsize{25pt}{10mm}\selectfont}
@@ -195,28 +295,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \usepackage{xcolor}
-\definecolor{lsLightBlue}{cmyk}{0.6,0.05,0.05,0}
-\definecolor{lsMidBlue}{cmyk}{0.75,0.15,0,0}
-\definecolor{lsMidDarkBlue}{cmyk}{0.9,0.4,0.05,0}
-\definecolor{lsDarkBlue}{cmyk}{0.9,0.5,0.15,0.3}
-\definecolor{lsNightBlue}{cmyk}{1,0.47,0.22,0.68}
-\definecolor{lsYellow}{cmyk}{0,0.25,1,0}
-\definecolor{lsLightOrange}{cmyk}{0,0.50,1,0}
-\definecolor{lsMidOrange}{cmyk}{0,0.64,1,0}
-\definecolor{lsDarkOrange}{cmyk}{0,0.78,1,0}
-\definecolor{lsRed}{cmyk}{0.05,1,0.8,0}
-\definecolor{lsLightWine}{cmyk}{0.3,1,0.6,0}
-\definecolor{lsMidWine}{cmyk}{0.54,1,0.65,0.1}
-\definecolor{lsDarkWine}{cmyk}{0.58,1,0.70,0.35}
-\definecolor{lsSoftGreen}{cmyk}{0.32,0.02,0.72,0}
-\definecolor{lsLightGreen}{cmyk}{0.4,0,1,0}
-\definecolor{lsMidGreen}{cmyk}{0.55,0,0.9,0.1}
-\definecolor{lsRichGreen}{cmyk}{0.6,0,0.9,0.35}
-\definecolor{lsDarkGreen1}{cmyk}{0.85,0.02,0.95,0.38}
-\definecolor{lsDarkGreen2}{cmyk}{0.85,0.05,1,0.5}
-\definecolor{lsNightGreen}{cmyk}{0.88,0.15,1,0.66}
-\definecolor{lsLightGray}{cmyk}{0,0,0,0.17}
-\definecolor{lsGuidelinesGray}{cmyk}{0,0.04,0,0.45}
+\input{LSP/lsp-seriesinfo/series.def} % \lsSeriesColor, \lsSeriesTitle and \lsISSN are defined here
+
 
 
 
@@ -280,87 +360,7 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\eotms}{eotms}
-\newcommand{\eotmsig}{eotmsig}
-\newcommand{\sidl}{sidl}
-\newcommand{\algad}{algad}
-\newcommand{\tmnlp}{tmnlp}
-\newcommand{\nc}{nc}		%Niger Congo
-\newcommand{\tbls}{tbls}	%Lecture Notes in Language Sciences
-\newcommand{\silp}{silp}	%Studies in Laboratory Phonology
-\newcommand{\tdgi}{tdgi}	%Topics at the Discourse Grammar Interface
-\newcommand{\cmle}{cmle}	%Computational Models of Language Evolution
-\newcommand{\cfls}{cfls}	%Conceptual Foundation of the Language Sciences
-\newcommand{\lv}{lv}		%Language Variation
-\newcommand{\dummyseries}{dummyseries}
-\newcommand{\guidelines}{guidelines}
-\newcommand{\lsSeriesFontColor}{white}
-
-\AtBeginDocument{
-\ifx\lsSeries\eotms
-	\newcommand{\lsSeriesTitle}{Empirically Oriented Theoretical \newlineCover Morphology and Syntax~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsMidBlue}
-\fi
-\ifx\lsSeries\eotmsig
-	\newcommand{\lsSeriesTitle}{Implemented Grammars~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsMidBlue}
-\fi
-\ifx\lsSeries\sidl
-	\newcommand{\lsSeriesTitle}{Studies in Diversity Linguistics~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsRichGreen}
-	\renewcommand{\lsISSN}{2363-5568}
-\fi
-\ifx\lsSeries\algad
-	\newcommand{\lsSeriesTitle}{African Language Grammars \newlineCover and Dictionaries~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsLightOrange}
-\fi
-\ifx\lsSeries\scl
-	\newcommand{\lsSeriesTitle}{Studies in Caribbean Languages~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsDarkOrange}
-\fi
-\ifx\lsSeries\tmnlp
-	\newcommand{\lsSeriesTitle}{Translation and Multilingual Natural \newlineCover Language Processing~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsDarkBlue}
-\fi
-\ifx\lsSeries\tbls
-	\newcommand{\lsSeriesTitle}{Textbooks in Language Sciences~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsYellow}
-\fi	
-\ifx\lsSeries\nc
-	\newcommand{\lsSeriesTitle}{Monographs on Comparative Niger-Congo~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsRed}
-\fi	
-\ifx\lsSeries\silp
-	\newcommand{\lsSeriesTitle}{Studies in Laboratory Phonology~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsLightWine}
-	\renewcommand{\lsISSN}{2363-5576}
-\fi	
-\ifx\lsSeries\tdgi
-	\newcommand{\lsSeriesTitle}{Topics at the Discourse Grammar Interface~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsMidDarkBlue}
-\fi	
-\ifx\lsSeries\cmle
-	\newcommand{\lsSeriesTitle}{Computational Models of Language Evolution~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsNightBlue}
-\fi	
-\ifx\lsSeries\cfls
-	\newcommand{\lsSeriesTitle}{Conceptual Foundations of \newlineCover Language Science~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsNightGreen}
-\fi	
-\ifx\lsSeries\lv
-	\newcommand{\lsSeriesTitle}{Language Variation~\lsSeriesNumber}
-	\newcommand{\lsSeriesColor}{lsDarkWine}
-\fi	
-\ifx\lsSeries\dummyseries
-	\newcommand{\lsSeriesTitle}{~}
-	\newcommand{\lsSeriesColor}{lsNightGreen}
-\fi
-\ifx\lsSeries\guidelines
-	\newcommand{\lsSeriesTitle}{Language Science Press Guidelines}
-	\newcommand{\lsSeriesColor}{lsGuidelinesGray}
-	\renewcommand{\lsCoverFontColor}{black}
-\fi
-}	
+% \input{LSP/lsp-seriesinfo/seriesinfo.tex}
 
 % \@ifundefined{blackandwhite}
 % 	{}
@@ -381,6 +381,10 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 \iflsDraft
   \ifoot{Draft of \today, \currenttime}
 \fi
+\iflsOpenReview
+  \ifoot{{\color{lsRed}Open review version}. Final version at \url{\lsURL}.}
+\fi
+
 %% \ihead{\upshape{\headmark}}
 %% \ohead{\pagemark}
 %% \cfoot{}
@@ -413,10 +417,14 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 		doi=false,
 		eprint=false,
 		backend=\lsBiblatexBackend,
-		indexing=cite
+		indexing=cite,
+		\iflsCollection\else
+			toc=bib 		% make bibliography appear in toc
+		\fi
 		]{biblatex}
 	\renewcommand{\postnotedelim}{: }%
 	\renewcommand{\multicitedelim}{\addsemicolon\space}%  
+	\renewcommand{\compcitedelim}{\multicitedelim}
 	\DeclareFieldFormat{postnote}{#1}%
 	%\renewcommand{\nameyeardelim}{ }%		
 \else	%BibTeX
@@ -441,6 +449,8 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 	% This is what Stefan did:
 	%\let\citew=\citealt
 \fi
+
+
 
 % penalties against widows and orphans in bibliography
 % http://tex.stackexchange.com/questions/51257/how-can-i-force-bibliography-items-not-to-be-split-across-pages
@@ -654,6 +664,23 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 			of \today, \currenttime
 			\end{tabular}}
 	   \end{textblock}
+	\fi
+	\iflsOpenReview
+		\iflsDraft
+			\ClassError{LSP/langsci}{Open review mode not compatible with draft mode. Please disable one of them}{}	
+		\fi
+		\begin{textblock}{170}(-20,75)
+			\rotatebox{30}{
+			\colorbox{red}{
+			\parbox[c][15ex][c]{220mm}{\centering\lsCoverTitleFont\color{white}Open Review\\[-0.1ex]}
+			% \begin{tabular}{c}
+			% 	~\\
+			% 	\scalebox{6}{\color{red}Open Review}\\[-0.5ex]
+			% 	~%version of \today, \currenttime
+			% \end{tabular}
+			}
+			}
+	   \end{textblock}
 	\fi}
 
 \newcommand{\lsCoverTitleAuthor}{
@@ -781,7 +808,7 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 \newcommand{\lsCollectionPaperCitation}{\scalebox{1.2}{
 	\includegraphics{\logopath/langsci_spinelogo_nocolor.pdf}}%
 	\hspace{0.8em}%
-	\parbox[b]{.85\textwidth}{\linespread{0.8}\small\normalfont\lsCollectionPaperCitationText}}
+	\parbox[b]{.85\textwidth}{\linespread{0.8}\small\normalfont\lsCollectionPaperCitationText.}}
 \newcommand{\lsCollectionPaperCitationText}{\string\lsCollectionPaperCitationText.}
 \newcommand{\lsPaper}{
 	\renewcommand{\maketitle}{
@@ -823,11 +850,7 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newcommand{\lsOutputLong}{long}
-\newcommand{\lsOutputShort}{short}
-\newcommand{\lsOutputInprep}{inprep}
-\newcommand{\lsOutputPaper}{paper}
-\newcommand{\lsOutputGuidelines}{guidelines}
+% \newcommands moved to beginning of document so they can be used width geometry.
 
 
 \AtBeginDocument{
@@ -904,7 +927,117 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 	{\setcounter{page}{-1}
 	% First titlepage:
 	{\lsFrontPage}}
+\fi
+
+\ifx\lsOutput\lsOutputCoverBOD				 % only if output=cover 
+	\renewcommand{\maketitle}{}  %no need for this
+	\StrLen{\@subtitle}[\subtitleStrLen]     % check if a subtitle exists
+	\pagestyle{empty}
+	\pgfdeclarelayer{lspcls_bg} % Please make sure to never use lspcls_... PGF layers in any document
+	\pgfsetlayers{lspcls_bg,main}
+	
+	\begin{tikzpicture}[remember picture, overlay,bg/.style={outer sep=0}]
+	\begin{pgfonlayer}{lspcls_bg} % background layer
+	\node [bg, left = 24.5mm of current page.east, fill=\lsSeriesColor, minimum height=23.1cm, minimum width=15.2cm] (lspcls_bg1) {}; % Die können wir noch dynamisch bestimmen
+	\node [bg, right = 24.5mm of current page.west, fill=\lsSeriesColor, minimum height=23.1cm, minimum width=15.2cm] (lspcls_bg2) {};
+	\node at (current page.center) [bg, minimum height=24.6cm, minimum width=\totalspine,dashed] (lspcls_bgspline) {}; % add draw option for preview mode 
+	\end{pgfonlayer}
+	
+	% Text and Graphics Layer
+	
+	% Spine
+	\node [above = 7.5mm of lspcls_bgspline.south] (lspcls_splinelogo) {\color{\lsSeriesColor}\includegraphics{./LSP/lsp-logos/langsci_spinelogo_nocolor.pdf}};
+	\node [font=\fontsize{18pt}{14pt}\selectfont, above left = 15mm and 4mm of lspcls_splinelogo.north, rotate=270] (lspcls_splinetitle) {\color{\lsSeriesColor} \lsSpineAuthorFont{\lsSpineAuthor} \hspace{13mm} \lsSpineTitleFont{\@title}}; 
+	
+	% Book Cover
+	
+	\newcommand{\lsCoverFontColour}{white}
+	
+	\node [execute at begin node={}, font=\fontsize{52pt}{16.75mm}\selectfont, below right = 10mm and 7.5mm of lspcls_bg1.north west, text width=13.7cm, align=left] (lspcls_covertitle) {\color{\lsCoverFontColour}\lsCoverTitleFont{\@title\par}}; % x = 15mm - 7.5mm ; y = 17.5mm - 7.5mm
+	
+	\ifnum\subtitleStrLen=0  % Is there a subtitle?
+	\node [font=\fontsize{25pt}{12.5mm}\selectfont, right, below = 11.2mm of lspcls_covertitle.south, text width=137mm] {\color{\lsCoverFontColour}\lsCoverAuthorFont\nohyphens{\@author\par}}; % If not, just print the author
+	\else
+	\node [font=\fontsize{25pt}{10mm}\selectfont,below = 8mm of lspcls_covertitle.south, text width=137mm] (lspcls_coversubtitle) {\color{\lsCoverFontColour} \lsCoverSubTitleFont \nohyphens{\@subtitle}\par}; 
+	\node [font=\fontsize{25pt}{12.5mm}\selectfont, right, below = 11.2mm of lspcls_coversubtitle.south, text width=137mm] {\color{\lsCoverFontColour}\lsCoverAuthorFont{\nohyphens{\@author\par}}};
+	\fi
+	
+	\node [above left = 10mm and 7.5mm of lspcls_bg1.south east] {\color{\lsCoverFontColour}\includegraphics{./LSP/lsp-logos/langsci_logo_nocolor.pdf}};
+	\node [above right = 18.5mm and -.1mm of lspcls_bg1.south west, rectangle, fill=white, minimum size=17pt] (lspcls_square) {}; % 2
+	\path let \p1 = (lspcls_square.north east), \p2 = (lspcls_covertitle.west) in node at (\x2,\y1) (lspcls_seriesinfo) [font=\fontsize{17pt}{7.5mm}\selectfont, right, text width=95mm, anchor=north west] {\color{\lsCoverFontColour}\lsCoverSeriesFont{\lsSeriesTitle\par}};
+	
+	% Book Back Cover
+	\node [font=\fontsize{25pt}{10mm}\selectfont, right, below right = 16.5mm and 7.5mm of lspcls_bg2.north west, text width=11.5cm] (lspcls_backtitle) {\color{\lsCoverFontColour}\lsBackTitleFont{\lsBackTitle\par}};
+	\node [below = 10mm of lspcls_backtitle, text width=11.5cm, align=justify] {\color{\lsCoverFontColour}\lsBackBodyFont{\parindent=15pt\lsBackBody}};
+	%\node [below right = 192.5mm and 97.5mm of lspcls_bg2.north west] {\color{\lsCoverFontColour}ISBN \lsBackBodyFont{\lsISBN}};
+	\node [below right = 192.5mm and 97.5mm of lspcls_bg2.north west, text width=4cm] {
+		\colorbox{white}{
+			\begin{pspicture}(0,0)(4.1,1in)
+			\psbarcode[transx=.4,transy=.3]{\lsISBNhardcover}{includetext height=.7}{isbn}\end{pspicture}}};
+	
+	% Guiding Lines
+	%\draw [red, thick, dashed] (lspcls_covertitle.west) -- (lspcls_seriesinfo.west);
+
+%	\node [below right=17mm and 17mm of current page.north west] (GL1) {};
+%	\node [above left=17mm and 17mm of current page.south east] (GL2) {};
+%	\draw [dashed, orange, thick] (GL1) -| (GL2) -| (GL1);
+%	
+	
+	\end{tikzpicture} 
+	\end{titlepage}
+	\end{document}     % the cover and nothing else.
 \fi	
+
+\ifx\lsOutput\lsOutputCoverCS	 			 % only if output=covercs 	
+\renewcommand{\maketitle}{}  				 % no need for this 			
+	\StrLen{\@subtitle}[\subtitleStrLen]     % check if a subtitle exists
+	\pagestyle{empty}
+	\pgfdeclarelayer{lspcls_bg} % Please make sure to never use lspcls_... PGF layers in any document
+	\pgfsetlayers{lspcls_bg,main}
+	
+	\begin{tikzpicture}[remember picture, overlay,bg/.style={outer sep=0}]
+	\begin{pgfonlayer}{lspcls_bg} % background layer
+	\node [bg, left = 10.675mm of current page.east, fill=\lsSeriesColor, minimum height=22.5cm, minimum width=15.5cm] (lspcls_bg1) {}; % Die können wir noch dynamisch bestimmen % 7.5mm -> 10.675mm for bleed
+	\node [bg, right = 10.675mm of current page.west, fill=\lsSeriesColor, minimum height=22.5cm, minimum width=15.5cm] (lspcls_bg2) {};
+	\node at (current page.center) [bg, minimum height=24cm, minimum width=\spinewidth,dashed] (lspcls_bgspline) {}; % add [draw] option for preview mode 
+	\end{pgfonlayer}
+	
+	% Text and Graphics Layer
+	
+	% Spine
+	\node [above = 10.675mm of lspcls_bgspline.south] (lspcls_splinelogo) {\color{\lsSeriesColor}\includegraphics{./LSP/lsp-logos/langsci_spinelogo_nocolor.pdf}};
+	\node [font=\fontsize{18pt}{14pt}\selectfont, above left = 15mm and 4mm of lspcls_splinelogo.north, rotate=270] (lspcls_splinetitle) {\color{\lsSeriesColor} \lsSpineAuthorFont{\lsSpineAuthor} \hspace{13mm} \lsSpineTitleFont{\@title}}; 
+	
+	% Book Cover
+	
+	\newcommand{\lsCoverFontColour}{white}
+	
+	\node [execute at begin node={}, font=\fontsize{52pt}{16.75mm}\selectfont, below right = 10mm and 7.5mm of lspcls_bg1.north west, text width=140mm, align=left] (lspcls_covertitle) {\color{\lsCoverFontColour}\lsCoverTitleFont{\@title\par}}; % x = 15mm - 7.5mm ; y = 17.5mm - 7.5mm
+	
+	\ifnum\subtitleStrLen=0  % Is there a subtitle?
+	\node [font=\fontsize{25pt}{12.5mm}\selectfont, right, below = 11.2mm of lspcls_covertitle.south, text width=140mm] {\color{\lsCoverFontColour}\lsCoverAuthorFont\nohyphens{\@author\par}}; % If not, just print the author
+	\else
+	\node [font=\fontsize{25pt}{10mm}\selectfont, right, below = 8mm of lspcls_covertitle.south, text width=140mm] (lspcls_coversubtitle) {\color{\lsCoverFontColour} \lsCoverSubTitleFont \nohyphens{\@subtitle\par}}; 
+	\node [font=\fontsize{25pt}{12.5mm}\selectfont, right, below = 11.2mm of lspcls_coversubtitle.south, text width=140mm] {\color{\lsCoverFontColour}\lsCoverAuthorFont\nohyphens{\@author\par}};
+	\fi
+	
+	\node [below right = 197.5mm and 117.1mm of lspcls_bg1.north west] {\color{\lsCoverFontColour}\includegraphics{./LSP/lsp-logos/langsci_logo_nocolor.pdf}};
+	\node [above right = 18.5mm and -.1mm of lspcls_bg1.south west, rectangle, fill=white, minimum size=17pt] (lspcls_square) {}; % 2
+	\path let \p1 = (lspcls_square.north east), \p2 = (lspcls_covertitle.west) in node at (\x2,\y1) (lspcls_seriesinfo) [font=\fontsize{17pt}{7.5mm}\selectfont, right, text width=95mm, anchor=north west] {\color{\lsCoverFontColour}\lsCoverSeriesFont{\lsSeriesTitle\par}};
+	
+	% Book Back Cover
+	\node [font=\fontsize{25pt}{10mm}\selectfont, right, below right = 16.5mm and 7.5mm of lspcls_bg2.north west, text width=11.5cm] (lspcls_backtitle) {\color{\lsCoverFontColour}\lsBackTitleFont{\lsBackTitle\par}};
+	\node [below = 10mm of lspcls_backtitle, text width=11.5cm, align=justify] {\color{\lsCoverFontColour}\lsBackBodyFont{\parindent=15pt\lsBackBody}};
+	%\node [below right = 192.5mm and 97.5mm of lspcls_bg2.north west] {\color{\lsCoverFontColour}ISBN \lsBackBodyFont{\lsISBN}};
+	\node [below right = 192.5mm and 97.5mm of lspcls_bg2.north west, text width=4cm] {
+		\colorbox{white}{
+			\begin{pspicture}(0,0)(4.1,1in)
+			\psbarcode[transx=.4,transy=.3]{\lsISBNsoftcover}{includetext height=.7}{isbn}\end{pspicture}}};
+	\end{tikzpicture} 
+	\end{titlepage}
+	\end{document}     % the cover and nothing else.
+\fi		
+	
 
 \end{titlepage}
 
@@ -942,7 +1075,12 @@ al desirabilite de un nov lingua franca: On refusa continuar payar custosi tradu
 \ifx\lsSeries\sidl
 	\AtBeginDocument{
 	%\def\exfont{\normalsize\itshape}
-	\renewcommand{\eachwordone}{\itshape} 
+	\renewcommand{\eachwordone}{\itshape} % only \gll
+	
+	\let\oldtable\table 	% footnotes in tables without horizontal line
+	\let\endoldtable\endtable
+	\renewenvironment{table}{\setfootnoterule{0pt}\oldtable}{\endoldtable} 
+
 	}
 \fi
 
@@ -1008,7 +1146,12 @@ Published under the Creative Commons Attribution-NoDerivatives 4.0 Licence (CC B
 http://creativecommons.org/licenses/by-nd/4.0/ 
 \fi
  
-ISBN: \lsISBN \\
+\begin{tabular}{@{}l@{~}l}
+ISBN: & \lsISBN~(Digital) \\
+      &	\lsISBNhardcover~(Hardcover)\\
+      & \lsISBNsoftcover~(Softcover)\\
+\end{tabular}
+
 \IfStrEq{\lsISSN}{??}		% \IfStrEq from xstring
 	{}
 	{ISSN: \lsISSN}
@@ -1087,7 +1230,10 @@ guarantee the accuracy of such information thereafter.
 \fi
 
 \raggedbottom
-\deffootnote[1.5em]{1.5em}{0mm}{\textsuperscript{\thefootnotemark}\ }
+\deffootnote[1.5em]{1.5em}{\normalparindent}{\textsuperscript{\thefootnotemark}\ }
+\newlength{\normalparindent}
+\AtBeginDocument{\setlength{\normalparindent}{\parindent}}
+
 
 \KOMAoptions{footnotes=multiple}
 
@@ -1306,5 +1452,41 @@ guarantee the accuracy of such information thereafter.
 \setlength{\afterepigraphskip}{0\baselineskip}
 
 \usepackage{./LSP/lsp-styles/lsp-makros}
+
+
+% floats
+% http://mintaka.sdsu.edu/GF/bibliog/latex/floats.html
+% Alter some LaTeX defaults for better treatment of figures:
+
+    % See p.105 of "TeX Unbound" for suggested values.
+    % See pp. 199-200 of Lamport's "LaTeX" book for details.
+    %   General parameters, for ALL pages:
+    \renewcommand{\topfraction}{0.9}	% max fraction of floats at top
+    \renewcommand{\bottomfraction}{0.8}	% max fraction of floats at bottom
+    %   Parameters for TEXT pages (not float pages):
+    \setcounter{topnumber}{2}
+    \setcounter{bottomnumber}{2}
+    \setcounter{totalnumber}{4}     % 2 may work better
+    \setcounter{dbltopnumber}{2}    % for 2-column pages
+    \renewcommand{\dbltopfraction}{0.9}	% fit big float above 2-col. text
+    \renewcommand{\textfraction}{0.07}	% allow minimal text w. figs
+    %   Parameters for FLOAT pages (not text pages):
+    \renewcommand{\floatpagefraction}{0.7}	% require fuller float pages
+	% N.B.: floatpagefraction MUST be less than topfraction !!
+    \renewcommand{\dblfloatpagefraction}{0.7}	% require fuller float pages
+
+	% remember to use [htp] or [htpb] for placement
+
+\iflsShowIndex	% shows index commands in text
+	\usepackage{soul}
+	\usepackage[textwidth=2cm
+		]{todonotes}
+	\usepackage[noadjust]{marginnote}
+	\renewcommand{\marginpar}{\marginnote}
+	\let\isold\is 
+	\renewcommand{\isi}[1]{\sethlcolor{green}\hl{#1}\isold{#1}}
+	\renewcommand{\is}[1]{\todo[color=green,size=\scriptsize]{\tiny#1}\isold{#1}}
+\fi
+
 
 \endinput
