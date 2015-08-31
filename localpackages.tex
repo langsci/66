@@ -5,6 +5,10 @@
 \usepackage{lscape}
 \usepackage{xunicode} % tex-kuerzel in unicode-zeichen umwandeln
 \usepackage{linguex} % sternefeld-packung für glossen  
+% WORKAROUND for linguex-siunitx compatibility, see http://tex.stackexchange.com/questions/86184/
+\def\fg{}
+\usepackage{siunitx}
+
 \usepackage{vowel}
 \usepackage{qtree}
 \usepackage{graphicx}
@@ -17,6 +21,12 @@
 \usepackage{multirow}
 \usepackage{rotating}
 \usepackage{tablefootnote}% command has the same name
+\usepackage{multicol}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{subcaption}
+\usepackage[format=hang,justification=RaggedRight]{caption}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%                                              %%%
 %%%           Examples                           %%%
@@ -26,5 +36,3 @@
 % \usepackage{jambox}
 %% if you want the source line of examples to be in italics, uncomment the following line
 % \renewcommand{\exfont}{\itshape}
-
-

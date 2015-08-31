@@ -21,11 +21,12 @@ In the following, I will briefly lay out the system, before illustrating its app
 
 The schematic diagrams in \figref{deicticschema-1} and \figref{deicticschema-2} provide a bird's eye view on the deictic field, and the black dots indicate the speaker. In both sets, the deictic field is partitioned into four quadrants. In the /u/-forms, the point of reference  for projecting the four quadrants (indicated by \rede{⌀}) is located within the speech situation. Objects located uphill from the interlocutors are indicated by forms based on \emph{tu}, objects located downhill  from the interlocutors are indicated by forms based on  \emph{mu}, and objects on the same level (to either side of them) are indicated by forms based on \emph{yu} (see \figref{deicticschema-1}). Contrasts like left/right or front/back do exist in Yakkha, but they are rarely used in the expression of spatial orientation. The speakers are able to provide the lexemes when they are asked, but I have no instance of recorded natural speech using \emph{pheksaŋ} \rede{left} and \emph{chuptaŋ} \rede{right}. From the available lexical information, the left side is connoted negatively; it is used metaphorically in a term for a malicious wizard, for instance. This also  fits with the widespread perception of the left hand as impure in South Asian societies. The terms \emph{ondaŋ} \rede{front} and \emph{heksaŋ} \rede{back} are used more frequently than \rede{left} and \rede{right}. 
 
-
-\begin{figure}
-\centering
+\begin{figure}\RawFloats
+\begin{minipage}[t]{.445\textwidth}
+\raggedright
 \setlength{\fboxsep}{0pt}
 \fbox{
+\resizebox{!}{4.33cm}{
 \begin{tikzpicture}[xscale=1, yscale=-1, draw=black, fill=black!30]
 	\node (lo) at (-3,-3) {};
 	\node (ro) at ( 3,-3) {};
@@ -42,15 +43,15 @@ The schematic diagrams in \figref{deicticschema-1} and \figref{deicticschema-2} 
 	\node (mu) at ( 0, 2) {mu};
 \end{tikzpicture}
 }
-\caption{The deictic mapping system of the /u/-forms}\label{deicticschema-1}
-\end{figure}
-
-\bigskip
-
-\begin{figure}
+}
+\captionsetup{margin={0pt,20pt}}
+\captionof{figure}{The deictic mapping system of the /u/-forms}\label{deicticschema-1}
+\end{minipage}
+\begin{minipage}[t]{.545\textwidth}
 \centering
 \setlength{\fboxsep}{0pt}
 \fbox{
+\resizebox{!}{4.33cm}{
 \begin{tikzpicture}[xscale=1, yscale=-1, draw=black, fill=black!30]
 	\node (lo) at (-3,-3) {};
 	\node (ro) at ( 3,-3) {};
@@ -69,15 +70,17 @@ The schematic diagrams in \figref{deicticschema-1} and \figref{deicticschema-2} 
 	\node (mo) at ( 0, 2) {mo};
 \end{tikzpicture}
 }
-\caption{The transposed mapping system of  \emph{khe} and the /o/-forms}\label{deicticschema-2}
+}
+\captionsetup{margin={6pt,3pt}}
+\captionof{figure}{The transposed mapping system of \emph{khe} and the /o/-forms}\label{deicticschema-2}
+\end{minipage}
 \end{figure}
-
-\bigskip
 
 \begin{figure}
 \centering
 \setlength{\fboxsep}{0pt}
 \fbox{
+	\resizebox{!}{4.33cm}{
 \begin{tikzpicture}[xscale=1, yscale=-1, draw=black, fill=black!30]
 	\node (l) at (-3, 0) {};
 	\node (r) at ( 3, 0) {};
@@ -89,6 +92,7 @@ The schematic diagrams in \figref{deicticschema-1} and \figref{deicticschema-2} 
 	\node (to) at ( 0,-2) {to};
 	\node (mo) at ( 0, 2) {mo};
 \end{tikzpicture}
+}
 }
 \caption{Object-centered usage of \emph{mo} and \emph{to}}\label{deicticschema-3}
 \end{figure}
@@ -291,10 +295,11 @@ Tables \ref{deic-all1} and \ref{deic-all2}  provide an overview of all geomorphi
 
  \begin{table}[htp]
 \begin{centering}
+	\resizebox{\textwidth}{!}{
 \begin{tabular}{lllll}
 \lsptoprule
-									&{\sc up}		&\multicolumn{2}{l}{{\sc across}}&{\sc down}\\
-											&				&{\sc prox}&{\sc dist}&\\
+									&		&\multicolumn{2}{l}{{\sc across}}&\\
+											&	{\sc up}			&{\sc prox}&{\sc dist}&{\sc down}\\
 \midrule 	  
 			{\sc loc/dir}	&\emph{to}&\emph{khe}&\emph{yo}&\emph{mo}\\
 			{\sc dir} 				&\emph{tokhaʔla}&\emph{khekhaʔla}&\emph{yokhaʔla}&\emph{mokhaʔla}\\
@@ -308,6 +313,7 @@ Tables \ref{deic-all1} and \ref{deic-all2}  provide an overview of all geomorphi
 			{\sc loc-prox-quant}					&\emph{naʔtorok}&\emph{naʔkherek}&\emph{naʔyorok}&\emph{naʔmorok}\\
 \lspbottomrule
 \end{tabular} 
+}
 \caption{Geomorphic adverbs, /o/-forms and \emph{khe}}\label{deic-all2}
 \end{centering}
 \end{table}
