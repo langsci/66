@@ -1,0 +1,110 @@
+
+-----------
+In General:
+-----------
+
+1) Problem of examples & page breaks still exists.
+
+2) In examples, corpus source jumps into next line when translation is longer than one line (as in Ch. 11: 29a, 30a, 31c and many others throughout the book). This did not happen in my original tex file, so I do not know what the problem exactly is.
+
+3) FYI: "TO DO" comments: See answers written into the source file.
+
+4) New maps, i.e. Figures {nepalmap} and {map-sank}: The folder "figures" contains the old maps of Nepal and the Yakkha region. The new ones have been sent to Sebastian in spring. Figure environment: probably, width and height have to be adjusted.
+ 
+5) Exhaustive sections: see grammar on Pite Saami. As far as I remember, we talked about this and Martin allowed short intro sections without a section title.
+
+6) TABLES: The proofreaders  had trouble understanding certain tables, and I can totally see why. Removing vertical lines does not work at all for Kiranti paradigms. Both dimensions are equally important, and form should not f*** function... I hope we can rank function higher here and break this particular style rule. I think I have even discussed this with Martin and he agreed with me. I have pointed out the concerned tables below; esp. in Ch. 8, but in others, too.
+
+7) Folder "Figures": file Fig03.jpg and ...png (the illustration of a dog) are not from my grammar. Just in case they ended up there be accident and you were looking for them...
+
+8) Many of the proofreaders commented on the hyphenation. What happened? Is there a missing plugin, or some problem of the language settings?
+
+9) Sebastian: did you replace sequences of tt with anything (see p. 281 "u􀀀erance context)?
+
+
+
+Chapter	1
+----------------------------------
+
+
+Chapter	2
+----------------------------------
+
+- 	Fig. 2.9 - Why don't we simply use landscape?
+
+Chapter	3
+----------------------------------
+
+-	§ 3.1.3.3 - meŋ.khu.le - I don't want to break this example, is there another solution?
+- 	Fig. 3.4. Why three lines on top?
+
+
+Chapter	4
+----------------------------------
+-	Table 4.2: I have added some space between the tables.
+
+Chapter	5
+----------------------------------
+
+Chapter	6
+----------------------------------
+
+Chapter	7
+----------------------------------
+
+Chapter	8
+----------------------------------
+
+-	Table 8.12 Is it wider than the type area?
+-	Table 8.19 between 1st and 2nd person - why the double line here?
+-	Some instances of CVC and CV had been erroneously turned into small caps. I have repaired this.
+-	Table 8.10: should we use landscape? 
+-	Table 8.11, 8.14, 8.15 definitely need vertical lines.
+-	Ex. 13b misaligned, maybe because gloss exceeds type area. What to do?
+-	Ex. 18a: same
+-	Figure 8.2: captions were aligned centrally in the original version. Now there are problems.
+-	Table 8.14: entries should be in italics according to source file. Maybe the \multirow command is the culprit?
+-	
+
+Chapter	9
+----------------------------------
+
+-	I have split the table into 3 tables, we have to remember this when checking the final version (arrangement of tables and text). References in the text have been changed accordingly.
+
+Chapter	10
+----------------------------------
+
+Chapter	11
+----------------------------------
+
+- 	§ 11.1.6 - line exceeds type area, I cannot split it because it is a bib reference.
+-	Fig. 11.1 - One proofreader commented that it looks as if things are not in the right place and the structure does not become clear now. I agree with him.
+- 	end of 11.3.2 - line exceeds type area, but I would prefer not to break the Yakkha word here. Manual break possible here? 
+
+
+Chapter	12
+----------------------------------
+
+Chapter	13
+----------------------------------
+
+-	Table 13.2 - vertical lines needed. Makes no sense like this.
+
+Chapter	14
+----------------------------------
+
+Chapter	15
+----------------------------------
+
+Chapter	16
+----------------------------------
+
+Chapter	17
+----------------------------------
+
+
+Bibliography
+----------------------------------
+
+- Currently, language names, acronyms, countries, german book titles etc (there are many!!)are not capitalized. I either have to insert brackets in each bib record in the database, or you could change the style file, if possible. 
+
