@@ -31,7 +31,7 @@ pod: bod createspace
  
 
 #prepare for submission to BOD
-bod: main.pdf  
+bod: 
 	sed "s/output=short/output=coverbod/" main.tex >bodcover.tex 
 	xelatex bodcover.tex 
 	xelatex bodcover.tex
@@ -39,7 +39,7 @@ bod: main.pdf
 	./filluppages 4 main.pdf bod/bodcontent.pdf 
 
 # prepare for submission to createspace
-createspace:  main.pdf
+createspace:  
 	sed "s/output=short/output=covercreatespace/" main.tex >createspacecover.tex 
 	xelatex createspacecover.tex
 	xelatex createspacecover.tex
