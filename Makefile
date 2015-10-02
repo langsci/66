@@ -10,10 +10,10 @@ main.pdf: $(SOURCE)
 	xelatex -no-pdf main 
 	bibtex -min-crossrefs=200 main
 	xelatex  -no-pdf main
-	sed -i s/.*\\emph.*// main.adx #remove titles which biblatex puts into the name index
-	makeindex -o main.and main.adx
-	makeindex -o main.lnd main.ldx
-	makeindex -o main.snd main.sdx
+# 	sed -i s/.*\\emph.*// main.adx #remove titles which biblatex puts into the name index
+# 	makeindex -o main.and main.adx
+# 	makeindex -o main.lnd main.ldx
+# 	makeindex -o main.snd main.sdx
 	xelatex -no-pdf main 
 	xelatex main 
 

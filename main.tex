@@ -8,7 +8,7 @@
 % Everything following a % is ignored
 % Some lines start with %. Remove the % to include them
 
-\documentclass[output=long             % long|short|inprep              
+\documentclass[output=short             % long|short|inprep              
 % 	    ,blackandwhite
 % 		,smallfont
 % 		,draftmode  
@@ -38,12 +38,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}              
 \maketitle                
-\frontmatter
-%% uncomment if you have preface and/or acknowledgements
-%\include{chapters/preface}
+\frontmatter 
+\tableofcontents      
 \include{chapters/acknowledgments}
 \include{chapters/abbreviations}
-\tableofcontents      
  \mainmatter         
  
 
@@ -76,21 +74,21 @@
  \input{indexed/14_Coordination.tex}
  \input{indexed/18_Particles.tex}
 \backmatter
+\part*{Appendix}
 \addchap{Appendix A: Texts}
-
  \input{indexed/20_app_phopciba.tex}
  \input{indexed/20_app_namthalungma.tex}
- \input{indexed/20_app_linkhedhunga.tex}
-\phantomsection
-\addcontentsline{toc}{chapter}{Appendix B: Yakkha kinship terms}
-\includepdf{figures/90Grad_Verwandtschaft_eigeneFamilie_zum_Einbinden.pdf} 
+ \input{indexed/20_app_linkhedhunga.tex} 
 
-\includepdf{figures/90Grad_Verwandtschaft_Schwiegerfamilie_zum_Einbinden.pdf}
-
+\addchap{Appendix B: Yakkha kinship terms}
+  \vspace*{\fill}
+  \includegraphics[height=.88\textheight]{figures/90Grad_Verwandtschaft_eigeneFamilie_zum_Einbinden.pdf} 
+  \newpage
+  \vspace*{\fill}
+  \includegraphics[height=.88\textheight]{figures/90Grad_Verwandtschaft_Schwiegerfamilie_zum_Einbinden.pdf}
 
 \addchap{Appendix C: Index of Yakkha formatives}
-\input{indexed/21_affix_index.tex}
-
+  \input{indexed/21_affix_index.tex}
 
 \input{indexed/19_Nocite.tex}
 
