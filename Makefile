@@ -3,7 +3,7 @@ all: book pod cover
 
 # specify thh main file and all the files that you are including
 SOURCE= $(wildcard *.tex) $(wildcard chapters/*.tex)\
-localbibliography.bib\
+sorted.bib\
 LSP/langsci.cls
 	 
 main.pdf: $(SOURCE)
@@ -14,7 +14,7 @@ main.pdf: $(SOURCE)
 # 	makeindex -o main.and main.adx
 # 	makeindex -o main.lnd main.ldx
 # 	makeindex -o main.snd main.sdx
-	xelatex -no-pdf main 
+# 	xelatex -no-pdf main 
 	xelatex main 
 
 #create only the book
@@ -31,7 +31,7 @@ pod: bod createspace
  
 
 #prepare for submission to BOD
-bod: 
+bod: FORCE
 	sed "s/output=short/output=coverbod/" main.tex >bodcover.tex 
 	xelatex bodcover.tex 
 	xelatex bodcover.tex
@@ -39,7 +39,7 @@ bod:
 	./filluppages 4 main.pdf bod/bodcontent.pdf 
 
 # prepare for submission to createspace
-createspace:  
+createspace:  FORCE
 	sed "s/output=short/output=covercreatespace/" main.tex >createspacecover.tex 
 	xelatex createspacecover.tex
 	xelatex createspacecover.tex
@@ -57,3 +57,5 @@ clean:
 
 realclean: clean
 	rm -f *.dvi *.ps *.pdf 
+
+FORCE:
