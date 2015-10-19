@@ -14,7 +14,7 @@ main.pdf: $(SOURCE)
 # 	makeindex -o main.and main.adx
 # 	makeindex -o main.lnd main.ldx
 # 	makeindex -o main.snd main.sdx
-# 	xelatex -no-pdf main 
+	xelatex -no-pdf main 
 	xelatex main 
 
 #create only the book
