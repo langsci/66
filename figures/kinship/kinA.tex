@@ -1,0 +1,247 @@
+ 
+ 
+ 
+
+	\begin{tikzpicture}[
+			xscale=1.3,
+			yscale=.55,
+			frau/.style={draw,circle,text height=.75em,label={\begin{minipage}[t]{10em}#1\end{minipage}}},
+			mann/.style={draw,regular polygon,regular polygon sides=3,label={\begin{minipage}[t]{10em}#1\end{minipage}}},
+			%mann/.style={draw,regular polygon,regular polygon sides=3,yshift=-.2em,label={[yshift=.2em]right:#1}},
+			neut/.style={draw,regular polygon,regular polygon sides=4,text height=.35em,label={\begin{minipage}[t]{10em}#1\end{minipage}}},
+			every label/.style={align=left,font=\tiny,label position=right,text depth=.3em,text height=-.5em}
+		]
+
+		%Urgroßeltern
+		%\def\y{18}
+		%\node (mmm)  at (-6,\y)  [frau={\lat{}\dev{}mother’s mother’s\\mother}] {};
+		%\node (mmf)  at (-4,\y)  [mann={\lat{}\dev{}mother’s mother’s\\father}] {};
+		%\node (mfm)  at (-2,\y)  [frau={\lat{}\dev{}mother’s father’s\\mother}] {};
+		%\node (mff)  at ( 0,\y)  [mann={\lat{}\dev{}mother’s father’s\\father}] {};
+		%\node (fmm)  at ( 2,\y)  [frau={\lat{}\dev{}father’s mother’s\\mother}] {};
+		%\node (fmf)  at ( 4,\y)  [mann={\lat{}\dev{}father’s mother’s\\father}] {};
+		%\node (ffm)  at ( 6,\y)  [frau={\lat{}\dev{}father’s father’s \\mother}] {};
+		%\node (fff)  at ( 8,\y)  [mann={\lat{cottu}\dev{चोत्तु}father’s father’s \\father}] {};
+
+		%\draw (mmm)--++(0,-1)--++(1,0) node(mmm_mmf){} --++(1,0)--(mmf);
+		%\draw (mfm)--++(0,-1)--++(1,0) node(mfm_mff){} --++(1,0)--(mff);
+		%\draw (fmm)--++(0,-1)--++(1,0) node(fmm_fmf){} --++(1,0)--(fmf);
+		%\draw (ffm)--++(0,-1)--++(1,0) node(ffm_fff){} --++(1,0)--(fff);
+
+		%Großeltern
+		\def\y{15}
+		\node (mm)   at (-5,\y)  [frau={\lat{amum}\dev{आमुम}mother’s mother}] {};
+		\node (mf)   at (-1,\y)  [mann={\lat{apum}\dev{आपुम}mother’s father}] {};
+		\node (fm)   at (3,\y)   [frau={\lat{amum}\dev{आमुम}father’s mother}] {};
+		\node (ff)   at (7,\y)   [mann={\lat{apum}\dev{आपुम}father’s father}] {};
+
+		%\draw (mmm_mmf.center)--(mm);
+		%\draw (mfm_mff.center)--(mf);
+		%\draw (fmm_fmf.center)--(fm);
+		%\draw (ffm_fff.center)--(ff);
+
+		\draw (mm)--++(0,-1)--++(2,0) node(mm_mf){} --++(2,0)--(mf);
+		\draw (fm)--++(0,-1)--++(2,0) node(fm_ff){} --++(2,0)--(ff);
+
+		%Eltern
+		\def\y{6}
+		\node (m)    at (0,\y)   [frau={\lat{ama}\dev{आमा}mother}] {};
+		\node (f)    at (2,\y)   [mann={\lat{appa}\dev{आप्पा}father}] {};
+		\draw (m)--++(0,-1)--++(1,0) node(m_f){} --++(1,0)--(f);
+
+		%Mutters Geschwister
+		\def\y{12}
+		\node (mys)  at (-8,\y)  [frau={\lat{akoŋma}\dev{आकोङ्‌मा}mother’s younger \\sister}] {};
+		\node (mysh) at (-6,\y)  [mann={\lat{aphaŋ}\dev{आफाङ}mother’s younger \\sister’s husband}] {};
+		\node (myb)  at (-4,\y)  [mann={\lat{akoŋba}\dev{आकोङ्बा}mother’s younger \\brother}] {};
+		\node (mybw) at (-2,\y)  [frau={\lat{ani}\dev{आनी}mother’s younger \\brother’s wife}] {};
+		\node (mes)  at (4,\y)   [frau={\lat{ayem}\dev{आयेम}mother’s elder \\sister}] {};
+		\node (mesh) at (6,\y)   [mann={\lat{ayep}\dev{आयेप}mother’s elder \\sister’s husband}] {};
+		\node (meb)  at (8,\y)   [mann={\lat{akoŋba}\dev{आकोङ्बा}mother’s elder \\brother}] {};
+		\node (mebw) at (10,\y)  [frau={\lat{ani}\dev{आनी}mother’s elder \\brother’s wife}] {};
+
+		\draw (mm_mf.center)--++(0,-1)--++( 3,0)--++(0,-5.8)++(0,-.4)--(m);
+		\draw (mm_mf.center)--++(0,-1)--++(-5,0)--(mys);
+		\draw (mm_mf.center)--++(0,-1)--++(-1,0)--(myb);
+		\draw (mm_mf.center)--++(0,-1)--++( 7,0)--(mes);
+		\draw (mm_mf.center)--++(0,-1)--++(11,0)--(meb);
+
+		\draw (mys)--++(0,-1)--++(1,0) node(mys_mysh){} --++(1,0)--(mysh);
+		\draw (myb)--++(0,-1)--++(1,0) node(myb_mybw){} --++(1,0)--(mybw);
+		\draw (mes)--++(0,-1)--++(1,0) node(mes_mesh){} --++(1,0)--(mesh);
+		\draw (meb)--++(0,-1)--++(1,0) node(meb_mebw){} --++(1,0)--(mebw);
+
+		%Mutters Nichten und Neffen
+		\def\y{9}
+		\node (mysd)  at (-8,\y) [frau={\lat{anapnima}\dev{आनाप्निमा}mother’s younger \\sister’s daughter}] {};
+		\node (myss)  at (-6,\y) [mann={\lat{anapniba}\dev{आनाप्निबा}mother’s younger \\sister’s son}] {};
+		\node (mybs)  at (-2,\y) [mann={\lat{akhokniba}\dev{आखोक्निबा}mother’s younger \\brother’s son}] {};
+		\node (mybd)  at (-4,\y) [frau={\lat{akhoknima}\dev{आखोक्निमा}mother’s younger \\brother’s daughter}] {};
+		\node (mesd)  at (4,\y)  [frau={\lat{anapnima}\dev{आनाप्निमा}mother’s elder \\sister’s daughter}] {};
+		\node (mess)  at (6,\y)  [mann={\lat{anapniba}\dev{आनाप्निबा}mother’s elder \\sister’s son}] {};
+		\node (mebd)  at (8,\y)  [frau={\lat{akhoknima}\dev{आखोक्निमा}mother’s elder \\brother’s daughter}] {};
+		\node (mebs)  at (10,\y) [mann={\lat{akhokniba}\dev{आखोक्निबा}mother’s elder \\brother’s son}] {};
+
+		\draw (mys_mysh.center)--++(0,-1)--++(-1,0)--(mysd);
+		\draw (mys_mysh.center)--++(0,-1)--++( 1,0)--(myss);
+		\draw (myb_mybw.center)--++(0,-1)--++(-1,0)--(mybd);
+		\draw (myb_mybw.center)--++(0,-1)--++( 1,0)--(mybs);
+		\draw (mes_mesh.center)--++(0,-1)--++(-1,0)--(mesd);
+		\draw (mes_mesh.center)--++(0,-1)--++( 1,0)--(mess);
+		\draw (meb_mebw.center)--++(0,-1)--++(-1,0)--(mebd);
+		\draw (meb_mebw.center)--++(0,-1)--++( 1,0)--(mebs);
+
+		%Vaters Geschwister
+		\def\y{6}
+		\node (fys)  at (-8,\y)  [frau={\lat{ani}\dev{आनी}father’s younger \\sister}] {};
+		\node (fysh) at (-6,\y)  [mann={\lat{akku}\dev{आक्कु}father’s younger \\sister’s husband}] {};
+		\node (fyb)  at (-4,\y)  [mann={\lat{aphaŋ}\dev{आफाङ}father’s younger \\brother}] {};
+		\node (fybw) at (-2,\y)  [frau={\lat{achim}\dev{आछिम}father’s younger \\brother’s wife}] {};
+		\node (fes)  at (4,\y)   [frau={\lat{ani}\dev{आनी}father’s elder sister}] {};
+		\node (fesh) at (6,\y)   [mann={\lat{akku}\dev{आक्कु}father’s elder \\sister’s husband}] {};
+		\node (feb)  at (8,\y)   [mann={\lat{ayep}\dev{आयेप}father’s elder \\brother}] {};
+		\node (febw) at (10,\y)  [frau={\lat{ayem}\dev{आयेम}father’s elder \\brother’s wife}] {};
+
+		\draw (fm_ff.center)--++(0,-.5)--++(-3,0)--++(0,-.3)++(0,-.4)--++(0,-5.8)--++(-10,0)--(fys);
+		\draw (fm_ff.center)--++(0,-.5)--++(-3,0)--++(0,-.3)++(0,-.4)--++(0,-5.8)--++(-6,0)--(fyb);
+		\draw (fm_ff.center)--++(0,-.5)--++(-3,0)--++(0,-.3)++(0,-.4)--++(0,-5.8)--++( 0,0)--(f);
+		\draw (fm_ff.center)--++(0,-.5)--++(-3,0)--++(0,-.3)++(0,-.4)--++(0,-5.8)--++( 2,0)--(fes);
+		\draw (fm_ff.center)--++(0,-.5)--++(-3,0)--++(0,-.3)++(0,-.4)--++(0,-5.8)--++( 6,0)--(feb);
+
+		\draw (fys)--++(0,-1)--++(1,0) node(fys_fysh){} --++(1,0)--(fysh);
+		\draw (fyb)--++(0,-1)--++(1,0) node(fyb_fybw){} --++(1,0)--(fybw);
+		\draw (fes)--++(0,-1)--++(1,0) node(fes_fesh){} --++(1,0)--(fesh);
+		\draw (feb)--++(0,-1)--++(1,0) node(feb_febw){} --++(1,0)--(febw);
+
+		%Vaters Nichten und Neffen
+		\def\y{3}
+		\node (fysd)  at (-8,\y) [frau={\lat{akhoknima}\dev{आखोक्निमा}father’s younger \\sister’s daughter}] {};
+		\node (fyss)  at (-6,\y) [mann={\lat{akhokniba}\dev{आखोक्निबा}father’s younger \\sister’s son}] {};
+		\node (fybs)  at (-2,\y) [mann={\lat{aphu, anuncha}\dev{आफु, आनुन्छा}father’s younger \\brother’s son (e, y)}] {};
+		\node (fybd)  at (-4,\y) [frau={\lat{ana, anuncha}\dev{आना, आनुन्छा}father’s younger \\brother’s daughter\\(e, y)}] {};
+		\node (fesd)  at (4,\y)  [frau={\lat{akhoknima}\dev{आखोक्निमा}father’s elder \\sister’s daughter}] {};
+		\node (fess)  at (6,\y)  [mann={\lat{akhokniba}\dev{आखोक्निबा}father’s elder \\sister’s son}] {};
+		\node (febd)  at (8,\y)  [frau={\lat{ana, anuncha}\dev{आना, आनुन्छा}father’s elder \\brother’s daughter\\(e, y)}] {};
+		\node (febs)  at (10,\y) [mann={\lat{aphu, anuncha}\dev{आफु, आनुन्छा}father’s elder \\brother’s son (e, y)}] {};
+
+		\draw (fys_fysh.center)--++(0,-1)--++(-1,0)--(fysd);
+		\draw (fys_fysh.center)--++(0,-1)--++( 1,0)--(fyss);
+		\draw (fyb_fybw.center)--++(0,-1)--++(-1,0)--(fybd);
+		\draw (fyb_fybw.center)--++(0,-1)--++( 1,0)--(fybs);
+		\draw (fes_fesh.center)--++(0,-1)--++(-1,0)--(fesd);
+		\draw (fes_fesh.center)--++(0,-1)--++( 1,0)--(fess);
+		\draw (feb_febw.center)--++(0,-1)--++(-1,0)--(febd);
+		\draw (feb_febw.center)--++(0,-1)--++( 1,0)--(febs);
+
+		%eigene Generation
+		\def\y{0}
+		\node (ys)   at (-8,\y)  [frau={\lat{anuncha}\dev{आनुन्छा}younger sister}] {};
+		\node (ysh)  at (-6,\y)  [mann={\lat{tabhaŋ}\dev{ताभाङ}younger sister’s \\husband}] {};
+		\node (yb)   at (-4,\y)  [mann={\lat{anuncha}\dev{आनुन्छा}younger brother}] {};
+		\node (ybw)  at (-2,\y)  [frau={\lat{taŋme}\dev{तङ्‌मे}younger brothers’s \\wife}] {};
+		\node (ego)  at (0,\y)   [neut={\lat{}\dev{का} EGO},top color=black,bottom color=black] {};
+		\node (h)    at (2,\y)   [neut={\lat{hiŋkhuba/-ma}\dev{हिङ्खुबा/हिङ्खुमा}husband/wife}] {};
+		\node (es)   at (4,\y)   [frau={\lat{ana}\dev{आना}elder sister}] {};
+		\node (esh)  at (6,\y)   [mann={\lat{aŋap/aŋoʈeŋba}\dev{आङाप/आङोटेङ्‌बा}elder sister’s \\husband}] {};
+		\node (eb)   at (8,\y)   [mann={\lat{aphu}\dev{आफु}elder brother}] {};
+		\node (ebw)  at (10,\y)  [frau={\lat{aŋoʈeŋma}\dev{आङोटेङ्‌मा}elder brothers’s \\wife}] {};
+
+		\draw (m_f.center)--++(0,-4)--++(-1,0)--(ego);
+		\draw (m_f.center)--++(0,-4)--++(-9,0)--(ys);
+		\draw (m_f.center)--++(0,-4)--++(-5,0)--(yb);
+		\draw (m_f.center)--++(0,-4)--++( 3,0)--(es);
+		\draw (m_f.center)--++(0,-4)--++( 7,0)--(eb);
+
+		\draw (ys)--++(0,-1)--++(1,0) node(ys_ysh){} --++(1,0)--(ysh);
+		\draw (yb)--++(0,-1)--++(1,0) node(yb_ybw){} --++(1,0)--(ybw);
+		\draw (ego)--++(0,-1)--++(1,0) node(ego_h){} --++(1,0)--(h);
+		\draw (es)--++(0,-1)--++(1,0) node(es_esh){} --++(1,0)--(esh);
+		\draw (eb)--++(0,-1)--++(1,0) node(eb_ebw){} --++(1,0)--(ebw);
+
+		%Kindergeneration
+		\def\y{-3}
+		\node (ysd)  at (-8,\y) [frau={\lat{acya}\dev{आच्या}younger sister’s \\daughter}] {};
+		\node (yss)  at (-6,\y) [mann={\lat{acya}\dev{आच्या}younger sister’s \\son}] {};
+		\node (ybs)  at (-2,\y) [mann={\lat{aecha}\dev{आएछा}younger brother’s \\son}] {};
+		\node (ybd)  at (-4,\y) [frau={\lat{aecha}\dev{आएछा}younger brother’s \\daughter}] {};
+		\node (esd)  at (4,\y)  [frau={\lat{acya}\dev{आच्या}elder sister’s \\daughter}] {};
+		\node (ess)  at (6,\y)  [mann={\lat{acya}\dev{आच्या}elder sister’s \\son}] {};
+		\node (ebd)  at (8,\y)  [frau={\lat{aecha}\dev{आएछा}elder brother’s \\daughter}] {};
+		\node (ebs)  at (10,\y) [mann={\lat{aecha}\dev{आएछा}elder brother’s \\son}] {};
+
+		\draw (ys_ysh.center)--++(0,-1)--++(-1,0)--(ysd);
+		\draw (ys_ysh.center)--++(0,-1)--++( 1,0)--(yss);
+		\draw (yb_ybw.center)--++(0,-1)--++(-1,0)--(ybd);
+		\draw (yb_ybw.center)--++(0,-1)--++( 1,0)--(ybs);
+		\draw (es_esh.center)--++(0,-1)--++(-1,0)--(esd);
+		\draw (es_esh.center)--++(0,-1)--++( 1,0)--(ess);
+		\draw (eb_ebw.center)--++(0,-1)--++(-1,0)--(ebd);
+		\draw (eb_ebw.center)--++(0,-1)--++( 1,0)--(ebs);
+
+		%eigene Kinder
+		\def\y{-6}
+		\node (d)    at (-4,\y) [frau={\lat{acya mamu}\dev{आच्या मामु}daughter}] {};
+		\node (dh)   at (-2,\y) [mann={\lat{tabhaŋ}\dev{ताभाङ}daughter’s husband}] {};
+		\node (s)    at (4,\y)  [mann={\lat{acya babu}\dev{आच्या बाबु}son}] {};
+		\node (sw)   at (6,\y)  [frau={\lat{taŋme}\dev{ताङ्‌मे}son’s wife}] {};
+		
+		\draw (ego_h.center)--++(0,-4)--++(-5,0)--(d);
+		\draw (ego_h.center)--++(0,-4)--++( 3,0)--(s);
+
+		\draw (d)--++(0,-1)--++(1,0) node(d_dh){} --++(1,0)--(dh);
+		\draw (s)--++(0,-1)--++(1,0) node(s_sw){} --++(1,0)--(sw);
+
+		%Enkel
+		\def\y{-9}
+		\node (dd)   at (-6,\y) [frau={\lat{ayaŋmen}\dev{आयाङ्‌मेन}daughter’s daughter}] {};
+		\node (ddh)  at (-4,\y) [mann={\lat{yaŋmen tabhaŋ}\dev{याङ्‌मेन् ताभाङ}daughter’s daughter’s \\husband}] {};
+		\node (ds)   at (-2,\y) [mann={\lat{ayaŋmen}\dev{आयाङ्‌मेन}daughter’s son}] {};
+		\node (dsw)  at (0,\y)  [frau={\lat{yaŋmen taŋme}\dev{याङ्‌मेन् ताङ्‌मे}daughter’s son’s \\wife}] {};
+		\node (sd)   at (2,\y)  [frau={\lat{ayaŋmen}\dev{आयाङ्‌मेन}son’s daughter}] {};
+		\node (sdh)  at (4,\y)  [mann={\lat{yaŋmen tabhaŋ}\dev{याङ्‌मेन् ताभाङ}son’s daughter’s \\husband}] {};
+		\node (ss)   at (6,\y)  [mann={\lat{ayaŋmen}\dev{आयाङ्‌मेन}son’s son}] {};
+		\node (ssw)  at (8,\y)  [frau={\lat{yaŋmen taŋme}\dev{याङ्‌मेन् ताङ्‌मे}son’s son’s wife}] {};
+
+		\draw (d_dh.center)--++(0,-1)--++(-3,0)--(dd);
+		\draw (d_dh.center)--++(0,-1)--++( 1,0)--(ds);
+		\draw (s_sw.center)--++(0,-1)--++(-3,0)--(sd);
+		\draw (s_sw.center)--++(0,-1)--++( 1,0)--(ss);
+
+		\draw (dd)--++(0,-1)--++(1,0) node(dd_ddh){} --++(1,0)--(ddh);
+		\draw (ds)--++(0,-1)--++(1,0) node(ds_dsw){} --++(1,0)--(dsw);
+		\draw (sd)--++(0,-1)--++(1,0) node(sd_sdh){} --++(1,0)--(sdh);
+		\draw (ss)--++(0,-1)--++(1,0) node(ss_ssw){} --++(1,0)--(ssw);
+
+		%Urenkel
+		%\def\y{-12}
+		%\node (ddd)  at (-6,\y) [frau={\lat{}\dev{ }daughter’s daughter’s \\daughter}] {};
+		%\node (dds)  at (-4,\y) [mann={\lat{}\dev{ }daughter’s daughter’s \\son}] {};
+		%\node (dsd)  at (-2,\y) [frau={\lat{}\dev{ }daughter’s son’s \\daughter}] {};
+		%\node (dss)  at ( 0,\y) [mann={\lat{}\dev{ }daughter’s son’s \\son}] {};
+		%\node (sdd)  at ( 2,\y) [frau={\lat{}\dev{ }son’s daughter’s \\daughter}] {};
+		%\node (sds)  at ( 4,\y) [mann={\lat{}\dev{ }son’s daughter’s \\son}] {};
+		%\node (ssd)  at ( 6,\y) [frau={\lat{}\dev{ }son’s son’s \\daughter}] {};
+		%\node (sss)  at ( 8,\y) [mann={\lat{}\dev{ }son’s son’s \\son}] {};
+		
+		%\draw (dd_ddh.center)--++(0,-1)--++(-1,0)--(ddd);
+		%\draw (dd_ddh.center)--++(0,-1)--++( 1,0)--(dds);
+		%\draw (ds_dsw.center)--++(0,-1)--++(-1,0)--(dsd);
+		%\draw (ds_dsw.center)--++(0,-1)--++( 1,0)--(dss);
+		%\draw (sd_sdh.center)--++(0,-1)--++(-1,0)--(sdd);
+		%\draw (sd_sdh.center)--++(0,-1)--++( 1,0)--(sds);
+		%\draw (ss_ssw.center)--++(0,-1)--++(-1,0)--(ssd);
+		%\draw (ss_ssw.center)--++(0,-1)--++( 1,0)--(sss);
+		
+	\end{tikzpicture}
+
+% \vskip2.5em
+% \footnotesize
+% \noindent
+% %Further terms: great-grandparents: {\deva चोत्तु}; great-great-grandparents: {\deva केक्तु}; great-grandchildren: {\deva साप्सिक}, {\deva खोप्सिक}; great-great-grandchildren: {\deva पोʔलोङ}; great-great-great-grandchildren: {\deva जोʔलोङ}
+% Further terms: great-grandparents: \textit{cottu}; great-great-grandparents: \textit{kektu}; great-grandchildren: \textit{sapsik}, \textit{khopsik}; great-great-grandchildren: \textit{poʔloŋ}; great-great-great-grandchildren: \textit{joʔloŋ}
+% 
+% % \vskip2.5em
+% \tiny
+% \hfill
+% Made by Diana Schackow, Magman Jimi, Kamala Linkha. Typeset by Lennart Bierkandt.
+ 
