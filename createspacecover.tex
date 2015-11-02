@@ -8,10 +8,7 @@
 % Everything following a % is ignored
 % Some lines start with %. Remove the % to include them
 
-\documentclass[output=covercreatespace             % long|short|inprep              
-% 	    ,blackandwhite
-% 		,smallfont
-% 		,draftmode  
+\documentclass[output=covercreatespace             % long|short|inprep       
 		,biblatex
 		  ]{LSP/langsci}    
   
@@ -44,13 +41,13 @@
 \include{chapters/abbreviations}
  \mainmatter         
  
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%                                              %%%
-%%%             Chapters                         %%%
-%%%                                              %%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%%                                              %%%
+% %%%             Chapters                         %%%
+% %%%                                              %%%
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
  \input{indexed/02_Frontmatter.tex}
  \input{indexed/03_How-to-use.tex}
  \input{indexed/03_Intro_Yakkha.tex}
@@ -78,14 +75,49 @@
 \addchap{Appendix A: Texts}
  \input{indexed/20_app_phopciba.tex}
  \input{indexed/20_app_namthalungma.tex}
- \input{indexed/20_app_linkhedhunga.tex} 
+ \input{indexed/20_app_linkhedhunga.tex}  
 
 \addchap{Appendix B: Yakkha kinship terms}
-  \vspace*{\fill}
-  \includegraphics[height=.88\textheight]{figures/90Grad_Verwandtschaft_eigeneFamilie_zum_Einbinden.pdf} 
-  \newpage
-  \vspace*{\fill}
-  \includegraphics[height=.88\textheight]{figures/90Grad_Verwandtschaft_Schwiegerfamilie_zum_Einbinden.pdf}
+
+The two charts on the following pages show the kinship system for the own family and in-laws. 
+\medskip
+
+\noindent
+The following further terms are used:
+\begin{itemize}
+ \item  great-grandparents: \textit{cottu} % {\deva चोत्तु}
+ \item  great-great-grandparents: \textit{kektu} %{\deva केक्तु
+ \item  great-grandchildren: \textit{sapsik}, % {\deva साप्सिक}, 
+\textit{khopsik} %{\deva खोप्सिक}
+ \item  great-great-grandchildren: \textit{poʔloŋ} %{\deva पोʔलोङ}
+ \item  great-great-great-grandchildren: \textit{joʔloŋ} %{\deva जोʔलोङ}
+\end{itemize}
+ 
+% Charts made by Diana Schackow, Magman Jimi and Kamala Linkha. Charts typeset by Lennart Bierkandt
+ 
+ 
+
+\newpage 
+
+\section*{Own family}
+\newcommand{\lat}[1]{{\it #1}\par}  
+\newcommand{\dev}[1]{}  
+
+
+\begin{sideways}
+\resizebox{\textheight}{!}{
+  \input{./figures/kinship/kinA.tex}
+}
+
+\end{sideways}
+\newpage
+
+\section*{In-laws}
+\begin{sideways}
+\resizebox{\textheight}{!}{ 
+  \input{./figures/kinship/kinB.tex} 
+}
+\end{sideways}
 
 \addchap{Appendix C: Index of Yakkha formatives}
   \input{indexed/21_affix_index.tex}
