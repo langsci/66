@@ -1211,7 +1211,7 @@ Storage and cataloguing done by FU Berlin \\[3ex]
 
 \vfill
 
-\noindent
+\noindent\largerpage
 \lsp has no responsibility for the persistence or accuracy of URLs for
 external or third-party Internet websites referred to in this
 publication, and does not guarantee that any content on such websites
