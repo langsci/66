@@ -3,7 +3,7 @@
 ## Publication Info
 
 - Author: Diana Schackow 
-- Publication Date: not yet published
+- Publication Date: 2015-11-18
 - Series: Studies in Diversity Linguistics 
 - Volume: 7
 
