@@ -1,7 +1,7 @@
 {
   "versions": [{
-    "versiontype": "main",
-    "title": "Published version of Yakkha",
+    "versiontype": "first_edition",
+    "title": "A grammar of Yakkha",
     "authors": [{"name": "Diana Schackow"}],
     "publishedAt": "2015-11-18T00:00:33.000Z"
   }]
